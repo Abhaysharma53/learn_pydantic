@@ -1,13 +1,13 @@
 from pydantic import BaseModel, EmailStr, Field
-from typing import List, Dict, Optional
+from typing import List, Dict, Optional, Annotated
 
 class Patient(BaseModel):
-    name: str = Field(max_length = 50)
-    age: int = Field(gt = 18, lt = 35)
-    Gender: str
-    email: EmailStr
-    married: bool = Field(default= False)
-    weight: float = Field(gt = 0)
+    name: Annotated[str, Field(max_length = 50, title= 'name of the patient', description= 'name of patient in 50 words', examples= ['Abhay', 'Ajay'])]
+    age: Annotated[int ,Field(gt = 18, lt = 35)]
+    Gender: Annotated[str,Field(default= 'Unknown')]
+    email: Annotated[EmailStr, Field(description= 'email id of the patient')]
+    married:Annotated[bool, Field(default = False)]
+    weight:Annotated[float,Field(gt = 0)]
     allergies: Optional[List[str]] =  Field(max_length= 5, default= None) #can't add more than 5 values
     contact_info: Dict[str, str]
 
