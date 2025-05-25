@@ -7,7 +7,7 @@ class Patient(BaseModel):
     Gender: Annotated[str,Field(default= 'Unknown')]
     email: Annotated[EmailStr, Field(description= 'email id of the patient')]
     married:Annotated[bool, Field(default = False)]
-    weight:Annotated[float,Field(gt = 0)]
+    weight:Annotated[float,Field(gt = 0, strict= True)]
     allergies: Optional[List[str]] =  Field(max_length= 5, default= None) #can't add more than 5 values
     contact_info: Dict[str, str]
 
